@@ -24,7 +24,7 @@ public class MemberViewServlet extends HttpServlet {
        
 
 	/**
-	 * member 회원정보가져오기
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/views/member/memberView.jsp")
@@ -32,7 +32,7 @@ public class MemberViewServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
@@ -62,15 +62,20 @@ public class MemberViewServlet extends HttpServlet {
 			
 			if(result > 0) {
 				session.setAttribute("msg", "회원정보가 수정되었습니다.");
+
+				// 세션정보 갱신
+				session.setAttribute("loginMember", memberService.selectOneMember(memberId));
 			}
 			
-			response.sendRedirect(request.getContextPath() +"/"); 
+			
+			
 			
 		}catch(Exception e) {
 			session.setAttribute("msg", "회원정보 수정이 실패하였습니다.");
 			e.printStackTrace();
 		}
 		
+		response.sendRedirect(request.getContextPath() +"/member/memberView"); 
 		
 	}
 

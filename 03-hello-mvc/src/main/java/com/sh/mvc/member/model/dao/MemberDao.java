@@ -115,4 +115,21 @@ public class MemberDao {
 		return result;
 	}
 
+	public int updatePassword(Connection conn, String memberId, String newPassword) {
+		String sql = prop.getProperty("updatePassword");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, newPassword);
+			pstmt.setString(2, memberId);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new MemberException("비밀번호 변경 오류",e);
+		}
+		
+		
+		return result;
+	}
+
 }

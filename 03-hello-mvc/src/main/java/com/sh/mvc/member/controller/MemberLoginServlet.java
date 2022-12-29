@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sh.mvc.member.common.HelloMvcUtils;
 import com.sh.mvc.member.model.dto.Member;
 import com.sh.mvc.member.model.service.MemberService;
 
@@ -46,7 +47,7 @@ public class MemberLoginServlet extends HttpServlet {
 		
 		//2. 사용자입력값 가져오기
 		String memberId = request.getParameter("memberId"); //name값을 가져와야한다.
-		String password = request.getParameter("password");
+		String password = HelloMvcUtils.getEncryptedPassword(request.getParameter("password"), memberId);
 		String saveId = request.getParameter("saveId");
 		
 		System.out.println("memberId = " + memberId);

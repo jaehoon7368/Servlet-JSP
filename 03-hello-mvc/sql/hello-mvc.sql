@@ -53,3 +53,8 @@ values (
 commit;
 
 select * from member;
+
+delete from member
+where member_id in('xyzxyz','khkhkh');
+
+commit;
