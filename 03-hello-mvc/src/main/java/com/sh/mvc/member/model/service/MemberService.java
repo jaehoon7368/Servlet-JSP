@@ -3,6 +3,7 @@ package com.sh.mvc.member.model.service;
 import static com.sh.mvc.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.sh.mvc.member.model.dao.MemberDao;
 import com.sh.mvc.member.model.dto.Member;
@@ -19,6 +20,14 @@ public class MemberService {
 		close(conn);
 		return member;
 			
+	}
+	
+	public List<Member> selectAllMember() {
+		Connection conn = getConnection();
+		List<Member> members = memberDao.selectAllMember(conn);
+		close(conn);
+		
+		return members;
 	}
 
 	public int insertMember(Member member) {
@@ -73,4 +82,39 @@ public class MemberService {
 		
 		return result;
 	}
+
+	public int updateMemberRole(String memberId, String memberRole) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = memberDao.updateMemberRole(conn,memberId,memberRole);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteMember(String memberId) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = memberDao.deleteMember(conn,memberId);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	
 }
