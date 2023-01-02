@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%
 	List<Member> members = (List<Member>) request.getAttribute("members");
-
+	
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>   
@@ -12,9 +12,9 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
 <style>
 div#search-container {width: 100%; margin:0 0 10px 0; padding:3px; background-color: rgba(0, 188, 212, 0.3);}
-div#search-memberId	 {display: <%= searchType == null || "member_id".equals(searchType) ? "inline-block" : "none"%>;}
-div#search-memberName{display: <%= "member_name".equals(searchType) ? "inline-block" : "none"%>;}
-div#search-gender    {display: <%= "gender".equals(searchType) ? "inline-block" : "none"%>;}
+div#search-memberId	 {display: <%= searchType == null || "member_id".equals(searchType) ? "inline-block" : "none" %>;}
+div#search-memberName{display: <%= "member_name".equals(searchType) ? "inline-block" : "none" %>;}
+div#search-gender    {display: <%= "gender".equals(searchType) ? "inline-block" : "none" %>;}
 </style>
 <script>
 window.addEventListener('load', () => {
@@ -52,8 +52,8 @@ window.addEventListener('load', () => {
 	    <div id="search-memberId" class="search-type">
 	        <form action="<%=request.getContextPath()%>/admin/memberFinder">
 	            <input type="hidden" name="searchType" value="member_id"/>
-	            <input type="text" name="searchKeyword"  size="25" placeholder="검색할 아이디를 입력하세요."
-	             value="<%= "member_id".equals(searchType) ? searchKeyword : "" %>"/>
+	            <input type="text" name="searchKeyword"  size="25" placeholder="검색할 아이디를 입력하세요." 
+	            	value="<%= "member_id".equals(searchType) ? searchKeyword : "" %>"/>
 	            <button type="submit">검색</button>			
 	        </form>	
 	    </div>
@@ -61,7 +61,7 @@ window.addEventListener('load', () => {
 	        <form action="<%=request.getContextPath()%>/admin/memberFinder">
 	            <input type="hidden" name="searchType" value="member_name"/>
 	            <input type="text" name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."
-	            value="<%= "member_name".equals(searchType) ? searchKeyword : "" %>""/>
+	            	value="<%= "member_name".equals(searchType) ? searchKeyword : "" %>" />
 	            <button type="submit">검색</button>			
 	        </form>	
 	    </div>
@@ -126,6 +126,7 @@ window.addEventListener('load', () => {
 	<div id="pagebar">
 		<%= request.getAttribute("pagebar") %>
 	</div>
+	
 </section>
 <form action="<%= request.getContextPath() %>/amdin/updateMemberRole" name="memberRoleUpdateFrm" method="POST">
 	<input type="hidden" name="memberId" />
@@ -158,4 +159,10 @@ document.querySelectorAll(".member-role").forEach((select) => {
 
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
+
+
+
+
+
 
