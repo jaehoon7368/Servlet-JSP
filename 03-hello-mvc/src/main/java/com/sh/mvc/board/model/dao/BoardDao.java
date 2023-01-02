@@ -52,7 +52,7 @@ public class BoardDao {
 			
 			
 		} catch (Exception e) {
-			throw new BoardException("관리자 회원목록조회 오류!", e);
+			throw new BoardException("게시글 목록 조회 오류!", e);
 		}
 		
 		return boards;
