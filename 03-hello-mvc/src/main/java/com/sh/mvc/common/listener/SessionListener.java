@@ -24,16 +24,16 @@ public class SessionListener implements HttpSessionListener {
      * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
      */
     public void sessionCreated(HttpSessionEvent se)  { 
-         sessionCounter++;
-         System.out.println("[sessionCreated - 현재 접속자수 : " + sessionCounter + "]");
+       sessionCounter++;
+       System.out.println("[sessionCreated - 현재 접속자수 : " + sessionCounter + "]");
     }
 
 	/**
      * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
      */
     public void sessionDestroyed(HttpSessionEvent se)  { 
-    	if(sessionCounter >0) sessionCounter--;
-        System.out.println("[sessionDstroyed - 현재 접속자수 : " + sessionCounter + "]");
+    	if(sessionCounter > 0) sessionCounter--; 
+        System.out.println("[sessionDestroyed - 현재 접속자수 : " + sessionCounter + "]");
     }
 	
 }

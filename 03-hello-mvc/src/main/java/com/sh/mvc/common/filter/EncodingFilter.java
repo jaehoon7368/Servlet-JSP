@@ -15,12 +15,12 @@ import javax.servlet.http.HttpFilter;
 /**
  * Servlet Filter implementation class EncodingFilter
  */
-@WebFilter(value="/*",initParams = {
-		@WebInitParam(name = "encodingType", value="utf-8")
+@WebFilter(value="/*", initParams={
+		@WebInitParam(name="encodingType", value="utf-8")
 })
-// @WebFilter("/*") //value속성은 속성명 생략이 가능하다.
+// @WebFilter("/*") // value속성은 속성명 생략이 가능하다.
 public class EncodingFilter extends HttpFilter implements Filter {
-    
+     
 	String encodingType;
 
 	/**
@@ -35,7 +35,9 @@ public class EncodingFilter extends HttpFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding(encodingType);
-		System.out.println("[" + encodingType + "] 인코딩처리!");
+		System.out.println("[" + encodingType + "] 인코딩 처리!");
+		
+		
 		chain.doFilter(request, response);
 	}
 

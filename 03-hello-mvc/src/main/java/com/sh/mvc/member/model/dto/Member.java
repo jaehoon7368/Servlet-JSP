@@ -3,19 +3,22 @@ package com.sh.mvc.member.model.dto;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-/*
- * DTO
+/**
+ * 
+ * DTO 
  * VO
  * Entity
  * 
- * - member객체 하나는 db member테이블의 한 행과 매칭
+ * - member객체 하나는 db member테이블의 한 행과 매칭.
  * - member필드는 db member테이블의 컬럼과 매칭(호환가능한 자료형)
  * 
  * - 기본생성자/전체파라미터생성자
  * - getter/setter
  * - toString
+ *
  */
 public class Member {
+	
 	private String memberId;
 	private String password;
 	private String memberName;
@@ -145,5 +148,6 @@ public class Member {
 	}
 	
 	
-
+	
+	
 }

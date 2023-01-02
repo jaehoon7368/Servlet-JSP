@@ -1,6 +1,7 @@
 package com.sh.mvc.admin.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,10 +14,10 @@ import com.sh.mvc.member.model.service.MemberService;
 /**
  * Servlet implementation class AdminUpdateMemberRoleServlet
  */
-@WebServlet("/admin/updateMemberRole")
+@WebServlet("/amdin/updateMemberRole")
 public class AdminUpdateMemberRoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	MemberService memberService = new MemberService();
+	private MemberService memberService = new MemberService();
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -25,22 +26,25 @@ public class AdminUpdateMemberRoleServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		try {
-			//1. 사용자 입력값 가져오기
+			// 1. 사용자입력값 - memberId, memberRole
 			String memberId = request.getParameter("memberId");
 			String memberRole = request.getParameter("memberRole");
-			//2. 업무로직 - sql = update member set member_role = ? where member_id = ?
-			int result = memberService.updateMemberRole(memberId,memberRole);
+			System.out.println("memberId = " + memberId);
+			System.out.println("memberRole = " + memberRole);
 			
-			session.setAttribute("msg", "권한이 성공적으로 변경되었습니다.");
+			// 2. 업무로직 - DB 해당회원 권한 수정
+			int result = memberService.updateMemberRole(memberId, memberRole);
 			
-			
-			//3. 리다이렉트
-			response.sendRedirect(request.getContextPath() +"/admin/memberList");	
+			// 2.5 사용자메세지 전송 
+			session.setAttribute("msg", "회원권한을 성공적으로 변경했습니다.");
 			
 		} catch (Exception e) {
-			session.setAttribute("msg", "권한변경이 실패하였습니다.");
+			session.setAttribute("msg", "회원권한 변경중 오류가 발생했습니다.");
 			e.printStackTrace();
 		}
+		
+		// 3. 리다이렉트 - url변경
+		response.sendRedirect(request.getContextPath() + "/admin/memberList");
 	}
 
 }

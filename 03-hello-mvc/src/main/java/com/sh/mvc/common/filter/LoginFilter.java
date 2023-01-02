@@ -1,6 +1,7 @@
 package com.sh.mvc.common.filter;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -18,9 +19,8 @@ import com.sh.mvc.member.model.dto.Member;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter({ "/member/memberView", "/member/memberUpdate" , "/member/updatePassword"})
+@WebFilter({ "/member/memberView", "/member/memberUpdate", "/member/updatePassword"})
 public class LoginFilter extends HttpFilter implements Filter {
-       
 
 	/**
 	 * @see Filter#destroy()
@@ -41,10 +41,10 @@ public class LoginFilter extends HttpFilter implements Filter {
 		
 		if(loginMember == null) {
 			session.setAttribute("msg", "로그인 후 이용하실 수 있습니다.");
-			httpRes.sendRedirect(httpReq.getContextPath()+"/");
-			return; //조기리턴. 하위코드 실행 안함.
+			httpRes.sendRedirect(httpReq.getContextPath() + "/");
+			return; // 조기리턴. 하위코드 실행 안함.
 		}
-		
+
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}

@@ -26,16 +26,18 @@ public class JdbcTestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter(); 
 		out.append("jdbc 연결 테스트 중입니다....");
 		
 		try {
 			testJdbcConnection();
 			out.append("<h2>성공</h2>");
 		} catch (ClassNotFoundException | SQLException e) {
-			out.append("<h2>실패</h2>"); //클라이언트 전송용
-			e.printStackTrace(); //서버로깅용
+			out.append("<h2>실패</h2>"); // 클라이언트 전송용
+			e.printStackTrace();		// 서버로깅용
 		}
+		
+		
 	}
 
 	private void testJdbcConnection() throws ClassNotFoundException, SQLException {
@@ -46,32 +48,45 @@ public class JdbcTestServlet extends HttpServlet {
 		
 		String sql = "select * from member";
 		
-		//1.DriverClass 등록
+		// 1. DriverClass 등록
 		Class.forName(driverClass);
 		System.out.println("[드라이버클래스 등록완료!]");
 		
-		//2. Connection객체 생성
-		Connection conn = DriverManager.getConnection(url,user,password);
+		// 2. Connection 객체 생성
+		Connection conn = DriverManager.getConnection(url, user, password);
 		conn.setAutoCommit(false);
-		System.out.println("[Connection 객체 생성완료!]");
-		//3. PreparedStatement 객체 생성 및 미완성쿼리 값대입
+		System.out.println("[Connection객체 생성 완료!]");
+		
+		// 3. PreparedStatement 객체 생성 및 미완성쿼리 값대입
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		//4. 실행 (DML pstmt.executeUpdate():int, DQL pstmt.executeQuery():ResultSet)
+		
+		// 4. 실행 (DML pstmt.executeUpdate():int, DQL pstmt.executeQuery():ResultSet)
 		ResultSet rset = pstmt.executeQuery();
-		System.out.println("[PreparedStatement객체 생성 및 실행 완료!]");
-		//5. 이후처리 (DML 트랜잭션처리, DQL ResultSe을 자바변수에 옮겨담기
+		System.out.println("[PreparedStatment객체 생성 및 실행 완료!]");
+		
+		// 5. 이후처리 (DML 트랜잭션처리, DQL ResultSet을 자바변수에 옮겨담기)
 		while(rset.next()) {
 			String memberId = rset.getString("member_id");
 			String memberName = rset.getString("member_name");
 			
-			System.out.printf("%s\t%s\n",memberId,memberName);
+			System.out.printf("%s\t%s\n", memberId, memberName);
 		}
-		//6. 자원반납
+		
+		// 6. 자원반납
 		rset.close();
 		pstmt.close();
 		conn.close();
 		
 		System.out.println("[자원반납 완료!]");
+		
 	}
+	
+	
 
 }
+
+
+
+
+
+

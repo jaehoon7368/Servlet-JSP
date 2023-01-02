@@ -77,9 +77,7 @@
         <input type="button" value="비밀번호변경"  onclick="updatePassword();"/>
         <input type="button" onclick="deleteMember();" value="탈퇴"/>
 	</form>
-<form action="<%= request.getContextPath() %>/member/deleteMember" name="deleteMemberFrm" method = "post">
-	<input type="hidden" name="memberId"/>
-</form>
+<form action="<%= request.getContextPath() %>/member/deleteMember" name="deleteMemberFrm" method = "post"></form>
 </section>
 <script>
 /*
@@ -99,7 +97,6 @@ const updatePassword = () =>{
 const deleteMember = () =>{
 	if(confirm("회원님 탈퇴하시겠습니까?")){
 		const frm = document.deleteMemberFrm;
-		frm.memberId.value = memberId;
 		frm.submit();
 	}
 };
