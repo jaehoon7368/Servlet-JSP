@@ -10,6 +10,10 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
 <section id="board-container">
 	<h2>게시판 </h2>
+	<% if(loginMember != null){ %>
+	<input type="button" value="글쓰기" id="btn-add"
+		onclick = "location.href = '<%= request.getContextPath() %>/board/boardEnroll';" />
+	<%} %>
 	<table id="tbl-board">
 		<thead>
 			<tr>
@@ -31,10 +35,17 @@
 		%>
 			<tr>
 				<td><%=board.getNo() %></td>
-				<td><%=board.getTitle() %></td>
+				<td>
+					<a href="<%= request.getContextPath()%>/board/boardView?no=<%= board.getNo()%>"><%=board.getTitle() %></a>
+				</td>
 				<td><%=board.getWriter() %></td>
 				<td><%=board.getRegDate() %></td>
-				<td><%=board.getAttachCnt() %></td>
+				<td>
+				<%if(board.getAttachCnt() > 0) { %>
+					<img src="<%=request.getContextPath() %>/images/file.png" style="width:16px;" />
+					
+				<%} %>
+				</td>
 				<td><%=board.getReadCount() %></td>
 			</tr>
 		<%
