@@ -106,6 +106,22 @@ public class HelloMvcUtils {
 		return pagebar.toString();
 	}
 
+	public static String convertLineFeedToBr(String str) {
+		return str.replaceAll("\\n", "<br/>");
+	}
+
+	/**
+	 * XSS 공격대비 방어
+	 * - cross-site scripting 공격
+	 * - 악성스크립트를 작성하고, 열람하는 사용자로 하여금, 자신들이 만든 가짜페이지로 이동시키거나, 브라우져내의 쿠키등 개인정보를 탈취하는 공격
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String escapeHtml(String str) {
+		return str.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+	}
+
 }
 
 

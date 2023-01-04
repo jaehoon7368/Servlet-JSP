@@ -4,16 +4,16 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
-	List<Board> boards = (List<Board>) request.getAttribute("boards");
-	System.out.println("boards = " + boards);
+	List<Board> boardList = (List<Board>) request.getAttribute("boardList");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
 <section id="board-container">
 	<h2>게시판 </h2>
+	
 	<% if(loginMember != null){ %>
 	<input type="button" value="글쓰기" id="btn-add"
-		onclick = "location.href = '<%= request.getContextPath() %>/board/boardEnroll';" />
-	<%} %>
+		onclick="location.href = '<%= request.getContextPath() %>/board/boardEnroll';" />
+	<% } %>
 	<table id="tbl-board">
 		<thead>
 			<tr>
@@ -26,31 +26,31 @@
 			</tr>
 		</thead>
 		<tbody>
-		<%if(boards.isEmpty()){ %>
+		<% if(boardList.isEmpty()){ %>	
 			<tr>
-				<td colspan="6">조회된 게시글이 없습니다.</td>
+				<td colspan="6">조회된 게시물이 없습니다.</td>
 			</tr>
-		<%}else {
-			for(Board board : boards) {
+		<% 
+		   } else { 
+			 for(Board board : boardList){
 		%>
 			<tr>
-				<td><%=board.getNo() %></td>
+				<td><%= board.getNo() %></td>
 				<td>
-					<a href="<%= request.getContextPath()%>/board/boardView?no=<%= board.getNo()%>"><%=board.getTitle() %></a>
+					<a href="<%= request.getContextPath() %>/board/boardView?no=<%= board.getNo() %>"><%= board.getTitle() %></a>
 				</td>
-				<td><%=board.getWriter() %></td>
-				<td><%=board.getRegDate() %></td>
+				<td><%= board.getWriter() %></td>
+				<td><%= board.getRegDate() %></td>
 				<td>
-				<%if(board.getAttachCnt() > 0) { %>
-					<img src="<%=request.getContextPath() %>/images/file.png" style="width:16px;" />
-					
-				<%} %>
+					<% if(board.getAttachCnt() > 0){ %>
+						<img src="<%= request.getContextPath() %>/images/file.png" style="width:16px; ">
+					<% } %>
 				</td>
-				<td><%=board.getReadCount() %></td>
+				<td><%= board.getReadCount() %></td>
 			</tr>
 		<%
-			}
-		} 
+			 }
+		   } 
 		%>
 		</tbody>
 	</table>

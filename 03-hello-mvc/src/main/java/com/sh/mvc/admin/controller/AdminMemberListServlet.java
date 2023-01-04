@@ -19,8 +19,9 @@ import com.sh.mvc.member.model.service.MemberService;
  * 페이징
  * 1. content 영역
  * 	- sql문
- *  - 현재페이지
- *  - 한페이지당 게시물수
+ *  - 현재페이지 page
+ *  - 한페이지당 게시물수 limit
+ *  - stard ~ end
  *  
  * 2. pagebar 영역
  * 	- 총게시물수

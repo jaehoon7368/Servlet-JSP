@@ -53,6 +53,12 @@ public class Board extends BoardEntity {
 				+ "]";
 	}
 
+	/**
+	 * boar객체 생성시 초기화된 attachment에 Attachment객체를 추가하는 메소드
+	 * 
+	 * @author honngd
+	 * @param attach
+	 */
 	public void addAttachment(Attachment attach) {
 		this.attachments.add(attach);
 	}

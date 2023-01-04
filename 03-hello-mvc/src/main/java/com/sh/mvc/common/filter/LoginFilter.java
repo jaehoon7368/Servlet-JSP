@@ -19,7 +19,10 @@ import com.sh.mvc.member.model.dto.Member;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter({ "/member/memberView", "/member/memberUpdate", "/member/updatePassword", "/board/boardEnroll"})
+@WebFilter({ 
+	"/member/memberView", "/member/memberUpdate", "/member/updatePassword", 
+	"/board/boardEnroll", "/board/boardUpdate", "/board/boardDelete" 
+})
 public class LoginFilter extends HttpFilter implements Filter {
 
 	/**

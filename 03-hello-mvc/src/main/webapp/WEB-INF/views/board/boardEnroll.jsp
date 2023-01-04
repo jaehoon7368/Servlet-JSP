@@ -46,7 +46,8 @@
 document.boardEnrollFrm.onsubmit = (e) => {
 	const title = e.target.title;
 	const content = e.target.content;
-	console.log(title,content);
+	console.log(title, content);
+	
 	//제목을 작성하지 않은 경우 폼제출할 수 없음.
 	if(!/^.+$/.test(title.value)){
 		alert("제목을 작성해주세요.");
@@ -56,11 +57,10 @@ document.boardEnrollFrm.onsubmit = (e) => {
 					   
 	//내용을 작성하지 않은 경우 폼제출할 수 없음.
 	if(!/^(.|\n)+$/.test(content.value)){
-		alert("내용을 입력해주세요.");
+		alert("내용을 작성해주세요.");
 		content.select();
 		return false;
 	}
-
 }
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
