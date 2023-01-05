@@ -1,3 +1,5 @@
+<%@page import="com.sh.mvc.board.model.dto.Attachment"%>
+<%@page import="java.util.List"%>
 <%@page import="com.sh.mvc.board.model.dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -26,6 +28,22 @@
 	<tr>
 		<th>첨부파일</th>
 		<td >
+			<%
+				List<Attachment> attachments = board.getAttachments();
+				if(!attachments.isEmpty()){
+					for(int i = 0; i < attachments.size();i++){
+						Attachment attach = attachments.get(i);
+			%>
+				<img src="<%=request.getContextPath() %>/images/file.png" width="16px" />
+				<%= attach.getOriginalFilename() %>
+				<input type="checkbox" name="delFile" id="delFile<%=i %>"  value="<%=attach.getNo()%>"/>
+				<label for="delFile<%=i%>">삭제</label>
+				<br />
+				
+			<% 
+					}
+				}
+			%>
 			<input type="file" name="upFile1">
 			<input type="file" name="upFile2">
 		</td>
@@ -43,6 +61,7 @@
 		</th>
 	</tr>
 </table>
+<input type="hidden" name="no" value="<%=board.getNo()%>"/>
 </form>
 </section>
 <script>

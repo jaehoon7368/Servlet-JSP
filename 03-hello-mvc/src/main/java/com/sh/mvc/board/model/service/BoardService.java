@@ -12,6 +12,7 @@ import java.util.Map;
 import com.sh.mvc.board.model.dao.BoardDao;
 import com.sh.mvc.board.model.dto.Attachment;
 import com.sh.mvc.board.model.dto.Board;
+import com.sh.mvc.board.model.dto.BoardComment;
 
 public class BoardService {
 
@@ -150,6 +151,58 @@ public class BoardService {
 			rollback(conn);
 			throw e;
 		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteAttachment(int attachNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = boardDao.deleteAttachment(conn, attachNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public List<BoardComment> selectBoardCommentList(int boardNo) {
+		Connection conn = getConnection();
+		List<BoardComment> comments = boardDao.selectBoardCommentList(conn,boardNo);
+		close(conn);
+		return comments;
+	}
+
+	public int insertBoardComment(BoardComment bc) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			commit(conn);
+			result = boardDao.insertBoardComment(conn,bc);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteBoardComment(int no) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = boardDao.deleteBoardComment(conn,no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
 			close(conn);
 		}
 		return result;

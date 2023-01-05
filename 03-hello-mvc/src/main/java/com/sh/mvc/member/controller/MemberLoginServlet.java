@@ -95,7 +95,10 @@ public class MemberLoginServlet extends HttpServlet {
 		}
 		
 		// 4. view단처리 - redirect(url변경 - 새로고침 안되도록)
-		response.sendRedirect(request.getContextPath() + "/"); // 클라이언트가 다시 요청할 주소
+//		response.sendRedirect(request.getContextPath() + "/"); // 클라이언트가 다시 요청할 주소
+		String referer = request.getHeader("Referer"); //http://~
+		System.out.println("referer = " + referer);
+		response.sendRedirect(referer);
 		
 	}
 

@@ -1,6 +1,7 @@
 package com.sh.mvc.board.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sh.mvc.board.model.dto.Board;
+import com.sh.mvc.board.model.dto.BoardComment;
 import com.sh.mvc.board.model.service.BoardService;
 import com.sh.mvc.common.HelloMvcUtils;
 
@@ -68,8 +70,13 @@ public class BoardViewServlet extends HttpServlet {
 					HelloMvcUtils.escapeHtml(board.getContent()))
 			);
 		
+		//댓글목록 조회
+		List<BoardComment> comments = boardService.selectBoardCommentList(no);
+		System.out.println("comments = " + comments);
+		
 		// 3. view단 위임
 		request.setAttribute("board", board);
+		request.setAttribute("comments", comments);
 		request.getRequestDispatcher("/WEB-INF/views/board/boardView.jsp").forward(request, response);
 	}
 
