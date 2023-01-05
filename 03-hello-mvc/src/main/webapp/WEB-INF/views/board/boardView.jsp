@@ -68,6 +68,8 @@
 		%>
 	</table>
 	
+		
+	
 	<hr style="margin-top:30px;" />    
     
     <div class="comment-container">
@@ -89,7 +91,14 @@
         <table id="tbl-comment">
         <%
         	for(BoardComment bc : comments){
-        		if(bc.getCommentLevel() ==1){
+        
+       		 boolean deleteWriter = loginMember != null && 
+       			(loginMember.getMemberRole() == MemberRole.A ||
+       				loginMember.getMemberId().equals(bc.getWriter()));
+   
+        %>
+        		
+        <%		if(bc.getCommentLevel() ==1){
         %>
             <%-- 댓글인 경우 tr.level1 --%>
             <tr class="level1">
@@ -102,7 +111,12 @@
                 </td>
                 <td>
                     <button class="btn-reply" value="<%= bc.getNo() %>">답글</button>
+                     <%
+                    
+					if(deleteWriter){
+                     %>
                     <button class="btn-delete" data-no="<%= bc.getNo() %>" data-board-no=<%=bc.getBoardNo() %>>삭제</button>
+                	<%} %>
                 </td>
             </tr>
             <%
@@ -118,7 +132,9 @@
                     <%= bc.getContent() %>
                 </td>
                 <td>
+                <%if(deleteWriter){ %>
                 	  <button class="btn-delete" data-no="<%= bc.getNo() %>" data-board-no=<%=bc.getBoardNo() %>>삭제</button>
+                <%} %>
                 </td>
             </tr>
             <%
