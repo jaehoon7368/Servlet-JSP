@@ -31,7 +31,7 @@ public class DeleteBoardCommentServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/board/boardView?no=" + boardNo);
 		}catch(Exception e) {
 			e.printStackTrace();
-			request.getSession().setAttribute("msg", "게시글 삭제중 오류가 발생했습니다.");
+			request.getSession().setAttribute("msg", "게시글 댓글 삭제중 오류가 발생했습니다.");
 		}
 		
 	}
